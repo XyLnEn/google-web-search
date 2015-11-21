@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html ng-app='app.search'>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.js"></script>
+    <script type="text/javascript" src="form.js"></script>
+    <title>Hello App Engine</title>
+  </head>
+
+  <body>
+  
+	<h1>Hello App Engine6!</h1>
+	
+	
+        <form ng-controller="ResultController">
+	        <h3>les params: </h3>
+	        <input type="text" id="text" name="p1" ng-model="p1" size=20 />
+<!-- 			<textarea ng-model="p1" name="p1"></textarea> -->
+	        <input type="submit" value="Submit" ng-click="affresult()" />
+	        <h1>vous cherchez {{p1}}</h1>
+	        
+	        <div ng-repeat="result in item">
+		        <h1>{{result.titleNoFormatting}}</h1>
+		        <a ng-href="{{result.unescapedUrl}}">{{result.unescapedUrl}}</a>
+<!-- 		        <h2>{{result.url}}</h2> -->
+		        <p>{{result.content}}</p>
+	        
+<!-- 	        <div ng-repeat="result in item"> -->
+<!-- 		        <h1>{{result.titleNoFormatting}}</h1> -->
+<!-- 		        <a ng-href="{{result.unescapedUrl}}">{{result.unescapedUrl}}</a> -->
+<!-- 		        <h2>{{result.url}}</h2> -->
+<!-- 		        <p>{{result.content}}</p> -->
+	        </div>
+	        <button ng-show="item" ng-click="lastpage()">page precedente</button>
+	        <button ng-show="item" ng-click="nextpage()">page suivante</button>
+	        
+        </form>
+        
+      
+  </body>
+</html>
