@@ -4,6 +4,7 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.js"></script>
+	<link rel="stylesheet" href="style.css" />
     <script type="text/javascript" src="form.js"></script>
     <title>Hello App Engine</title>
   </head>
@@ -13,7 +14,7 @@
 	<h1>Hello App Engine6!</h1>
 	
 	
-        <form ng-controller="ResultController">
+        <form ng-controller="ResultController as resultat">
 	        <h3>les params: </h3>
 	        <input type="text" id="text" name="p1" ng-model="p1" size=20 />
 <!-- 			<textarea ng-model="p1" name="p1"></textarea> -->
@@ -25,7 +26,36 @@
 		        <a ng-href="{{result.unescapedUrl}}">{{result.unescapedUrl}}</a>
 <!-- 		        <h2>{{result.url}}</h2> -->
 		        <p>{{result.content}}</p>
-	        
+		        <p>infos en plus:</p>
+		        <div ng-repeat="info in result.resp.equipement">
+		        {{info.nom}}
+		        </div>
+		        <!-- -------------------------------------------------------------------------- -->
+		        <li>
+					<div ng-class="{active:resultat.isSelected(result)}"> 
+						<a href ng-click="resultat.selectTab(result)" class="ajout">ajouter des infos?</a> 
+					</div>
+					
+					<!-- Le formulaire de renseignements -->
+					<div id="plugin" ng-show="resultat.isSelected(result)">
+						<header>
+							<p id="description">Quels sont les aménagements prévus pour les handicapés?</p>
+							<img src="images/logo.png" id="logo"> </header>
+						<ul id="formulaire" >
+							<form ng-submit="resultat.renseigner(result)">
+								<li ng-repeat="amenagement in resultat.amenagements">
+									<input type="checkbox" ng-model="amenagement.checked">
+									<span ng-model="amenagement.nom">{{amenagement.nom}}</span> <a href="" class="help" onClick="">?</a> </li>
+								<li>
+									<input type="submit" name="Submit" value="Valider" id="valider">
+								</li>
+							</form>
+						</ul>
+					</div>
+					<!-- Fin du formulaire de renseignement --> 
+					
+				</li>
+	        	<!-- -------------------------------------------------------------------------- -->
 <!-- 	        <div ng-repeat="result in item"> -->
 <!-- 		        <h1>{{result.titleNoFormatting}}</h1> -->
 <!-- 		        <a ng-href="{{result.unescapedUrl}}">{{result.unescapedUrl}}</a> -->

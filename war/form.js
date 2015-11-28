@@ -19,8 +19,44 @@ function (a) {
 function affichage(){
 	var app = angular.module('app.search',[]);
 	app.controller("ResultController", function($scope,$http){
-//		alert("4");
-		//this.item.test="ayy";
+
+		var user = {nom:'geof', annote:false};
+		this.amenagements = [
+			{nom:'assensseur', description:'ce batiment possede un assensseur'},
+			{nom:'porte', description:'ce batiment possede une porte 3.0'},
+			{nom:'toilettes', description:'ce batiment possede des grandes toilettes'},
+			{nom:'chient', description:'waf waf'}
+		];
+		   
+		this.renseigner = function(website) {
+			var newAmenagements = this.amenagements;
+		          //website.amenagements = [];
+			angular.forEach(newAmenagements, function(amenagement) {
+				if (amenagement.checked){
+				website.amenagements.push(amenagement);
+				website.utilisateurs.push({nom:'geof', annote:true})
+				} 
+			});
+		};
+  
+
+//Code pour afficher le plug-in
+		this.tab = 1;
+		  
+		this.selectTab = function(setTab){
+			if(this.tab == 1) {
+				this.tab = setTab;
+			}
+			else {
+				this.tab = 1;
+			}
+		};
+		
+		this.isSelected = function(checkTab){
+		return this.tab === checkTab;
+		};
+		
+		
 		$scope.affresult = function(){
 			var temp = $scope.p1;
 			$http.get('http://bustling-day-111011.appspot.com/google_request?p1=' + temp + '&start=0' ).success(function(response) {
